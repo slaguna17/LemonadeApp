@@ -31,6 +31,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -96,7 +97,7 @@ fun LemonTree(modifier: Modifier = Modifier) {
         else -> stringResource(id = R.string.Empty_glass)
     }
     var needed by remember {
-        mutableStateOf(1)
+        mutableStateOf(0)
     }
     var counter = 0
     Column(
@@ -111,7 +112,7 @@ fun LemonTree(modifier: Modifier = Modifier) {
                         state = 2
                     }
                     2 -> {
-                        if(counter <= needed){
+                        if(counter < needed){
                             counter ++
                         } else {
                             state = 3
@@ -123,11 +124,10 @@ fun LemonTree(modifier: Modifier = Modifier) {
                 }
             },
             colors = ButtonDefaults.buttonColors(Color.Transparent),
-//            shape = RoundedCornerShape(50), // = 50% percent
-            // or shape = CircleShape
+            shape = RoundedCornerShape(40.dp),
+
             modifier = modifier
                 .background(Color(0xFFC3EDD3))
-                .clip(RoundedCornerShape(15.dp))
         ) {
             Image(
                 painter = painterResource(id = imageResource),
